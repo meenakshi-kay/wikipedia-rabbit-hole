@@ -8,7 +8,7 @@ and reflections. SQLite database via SQLAlchemy, no external services needed.
 ## Setup
 
 
-open **[http://127.0.0.1:5000](https://wikipedia-rabbit-holes.onrender.com)** in your browser.
+open **https://wikipedia-rabbit-holes.onrender.com/** in your browser.
 
 
 
