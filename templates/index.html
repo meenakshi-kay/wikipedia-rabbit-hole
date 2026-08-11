@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}reading room{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <p class="eyebrow">genre selection</p>
+    <h1>pull something off the shelf</h1>
+    <p class="hero-sub">pick a section below</p>
+</header>
+
+<div class="shelf" id="shelf">
+    {% for genre in genres %}
+    <button class="spine" data-genre="{{ genre }}" style="--i: {{ loop.index0 }}">
+        <span class="spine-label">{{ genre }}</span>
+    </button>
+    {% endfor %}
+</div>
+
+<section class="card-slot" id="cardSlot">
+    <div class="index-card empty" id="emptyState">
+        <p class="empty-hint">choose a section from above to pull an article :)</p>
+    </div>
+
+    <div class="index-card is-hidden" id="loadingState">
+        <p class="loading-line"><span class="spinner"></span> <span id="loadingText">searching the stacks&hellip;</span></p>
+    </div>
+
+    <div class="index-card is-hidden" id="errorState">
+        <p class="error-line" id="errorText"></p>
+        <button class="btn btn-ghost" id="retryBtn" type="button">try again</button>
+    </div>
+
+    <div class="index-card is-hidden" id="resultState">
+        <p class="card-eyebrow" id="resultGenre"></p>
+        <h2 class="card-title" id="resultTitle"></h2>
+        <p class="card-meta" id="resultMeta"></p>
+        <p class="card-timing" id="resultTiming"></p>
+
+        <div class="card-actions">
+            <a class="btn btn-gold" id="openLink" href="#" target="_blank" rel="noopener">open article</a>
+            <button class="btn btn-moss" id="anotherBtn" type="button">give me another</button>
+            <button class="btn btn-wine" id="learnToggleBtn" type="button">mark as learned</button>
+            <button class="btn btn-ghost" id="readLaterBtn" type="button">save for later</button>
+        </div>
+
+        <form class="learn-form is-hidden" id="learnForm">
+            <div class="field-row">
+                <label for="ratingInput">rating <span class="field-hint">(1&ndash;10, optional)</span></label>
+                <input type="number" id="ratingInput" min="1" max="10" placeholder="&mdash;">
+            </div>
+            <div class="field-row">
+                <label for="keywordsInput">quick keywords <span class="field-hint">(comma separated, optional)</span></label>
+                <input type="text" id="keywordsInput" placeholder="e.g. hubris, orbital decay, video idea">
+            </div>
+            <div class="field-row">
+                <label for="reflectionInput">what did it make you think about? <span class="field-hint">(optional)</span></label>
+                <textarea id="reflectionInput" rows="4" placeholder="a summary, a tangent, a feeling, a video hook&hellip; whatever comes to mind"></textarea>
+            </div>
+            <div class="card-actions">
+                <button class="btn btn-gold" type="submit">save to library</button>
+                <span class="save-status" id="saveStatus"></span>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

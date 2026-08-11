@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}the wikipedia rabbit hole{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="page">
+    <nav class="topnav">
+        <a href="{{ url_for('index') }}" class="brand">
+            <span class="brand-mark">&#9776;</span> the wikipedia rabbit hole
+        </a>
+        <div class="topnav-links">
+            <a href="{{ url_for('index') }}" class="{{ 'is-active' if request.path == '/' else '' }}">reading room</a>
+            <a href="{{ url_for('read_later') }}" class="{{ 'is-active' if request.path == '/read-later' else '' }}">read later</a>
+            <a href="{{ url_for('learned') }}" class="{{ 'is-active' if request.path == '/learned' else '' }}">my shelf</a>
+        </div>
+    </nav>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+{% block scripts %}{% endblock %}
+</body>
+</html>

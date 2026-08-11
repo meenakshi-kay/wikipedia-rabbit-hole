@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}the archive — read later{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <p class="eyebrow">the waiting pile</p>
+    <h1>read later</h1>
+    <p class="hero-sub">
+        {% if entries %}
+            {{ entries|length }} article{{ 's' if entries|length != 1 else '' }} waiting.
+        {% else %}
+            nothing saved yet — pull something from the reading room and set it aside.
+        {% endif %}
+    </p>
+</header>
+
+{% if not entries %}
+<div class="index-card empty">
+    <p class="empty-hint"><a href="{{ url_for('index') }}">head to the reading room</a> to save your first article.</p>
+</div>
+{% else %}
+<div class="ledger">
+    {% for entry in entries %}
+    <article class="ledger-row">
+        <div class="ledger-main">
+            <p class="ledger-genre">{{ entry.genre or 'uncategorised' }} &middot; saved {{ entry.created_at.strftime('%d %b %Y') if entry.created_at else '' }}</p>
+            <h2 class="ledger-title">
+                {% if entry.url %}
+                <a href="{{ entry.url }}" target="_blank" rel="noopener">{{ entry.title }}</a>
+                {% else %}
+                {{ entry.title }}
+                {% endif %}
+            </h2>
+            {% if entry.words %}
+            <p class="ledger-meta">{{ entry.words }} words</p>
+            {% endif %}
+            {% if entry.note %}
+            <p class="ledger-reflection">{{ entry.note }}</p>
+            {% endif %}
+        </div>
+
+        <div class="ledger-side">
+            <form method="post" action="{{ url_for('delete_read_later', entry_id=entry.id) }}"
+                  onsubmit="return confirm('remove this from read later?');">
+                <button class="btn btn-ghost btn-small" type="submit">remove</button>
+            </form>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

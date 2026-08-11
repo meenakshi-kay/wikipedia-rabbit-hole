@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}library{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <p class="eyebrow">the ledger</p>
+    <h1>library</h1>
+    <p class="hero-sub">
+        {% if entries %}
+            {{ entries|length }} article{{ 's' if entries|length != 1 else '' }} marked learned so far.
+        {% else %}
+            nothing here yet :(
+        {% endif %}
+    </p>
+</header>
+
+{% if not entries %}
+<div class="index-card empty">
+    <p class="empty-hint"><a href="{{ url_for('index') }}">head to the reading room</a> to find your first article.</p>
+</div>
+{% else %}
+<div class="ledger">
+    {% for entry in entries %}
+    <article class="ledger-row">
+        <div class="ledger-main">
+            <p class="ledger-genre">{{ entry.genre or 'uncategorised' }} &middot; {{ entry.created_at.strftime('%d %b %Y') if entry.created_at else '' }}</p>
+            <h2 class="ledger-title">
+                {% if entry.url %}
+                <a href="{{ entry.url }}" target="_blank" rel="noopener">{{ entry.title }}</a>
+                {% else %}
+                {{ entry.title }}
+                {% endif %}
+            </h2>
+            {% if entry.words %}
+            <p class="ledger-meta">{{ entry.words }} words</p>
+            {% endif %}
+
+            {% if entry.keyword_list() %}
+            <div class="tag-row">
+                {% for kw in entry.keyword_list() %}
+                <span class="tag">{{ kw }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if entry.reflection %}
+            <p class="ledger-reflection">{{ entry.reflection }}</p>
+            {% endif %}
+        </div>
+
+        <div class="ledger-side">
+            {% if entry.rating %}
+            <div class="stamp" title="{{ entry.rating }}/10">{{ entry.rating }}<span>/10</span></div>
+            {% endif %}
+            <form method="post" action="{{ url_for('delete_learned', entry_id=entry.id) }}"
+                  onsubmit="return confirm('remove this from your library?');">
+                <button class="btn btn-ghost btn-small" type="submit">remove</button>
+            </form>
+        </div>
+    </article>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
