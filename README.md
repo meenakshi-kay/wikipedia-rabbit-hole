@@ -1,31 +1,24 @@
 # the archive
+(a website that lets you generate random wikipedia topics genre-wise so you'll always have cool conversation topics!)
 
-A Flask web app that pulls random-but-substantial Wikipedia articles by topic,
+app that pulls random-but-substantial Wikipedia articles by topic,
 and lets you keep a personal "learned" shelf with your own rating, keywords,
 and reflections. SQLite database via SQLAlchemy, no external services needed.
 
 ## Setup
 
-```bash
-cd wiki_app
-python3 -m venv venv
-source venv/bin/activate        # on Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python3 app.py
-```
 
-Then open **http://127.0.0.1:5000** in your browser.
+open **[http://127.0.0.1:5000](https://wikipedia-rabbit-holes.onrender.com)** in your browser.
 
-A `library.db` SQLite file will be created automatically in this folder on
-first run — that's where seen titles and your "learned" entries live.
+
 
 ## How it's structured
 
-- `app.py` — Flask routes (`/`, `/api/find`, `/api/learn`, `/learned`, delete)
-- `models.py` — SQLAlchemy models: `SeenTitle`, `LearnedEntry`
-- `wiki_client.py` — talks to the Wikipedia API (this is where genres/search
+- `app.py` : Flask routes (`/`, `/api/find`, `/api/learn`, `/learned`, delete)
+- `models.py` : SQLAlchemy models: `SeenTitle`, `LearnedEntry`
+- `wiki_client.py` :talks to the Wikipedia API (this is where genres/search
   terms live, and the speed-critical fetching logic)
-- `templates/` — Jinja2 templates
+- `templates/` : Jinja2 templates
 - `static/css/style.css`, `static/js/app.js`
 
 ## Why it's fast now
