@@ -56,7 +56,7 @@ class LearnedEntry(db.Model):
 
 
 class ReadLaterEntry(db.Model):
-    """Articles saved to read later — lighter than a full 'learned' entry."""
+    """Articles saved to read later"""
     __tablename__ = "read_later_entries"
 
     id = db.Column(db.Integer, primary_key=True)

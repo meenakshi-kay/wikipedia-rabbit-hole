@@ -14,8 +14,6 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(BASE_DIR, "library.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
-# IMPORTANT: set a real secret key via environment variable in production —
-# this signs the session cookie. Don't hardcode it once deployed.
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-only-change-me")
 
 db.init_app(app)

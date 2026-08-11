@@ -103,7 +103,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .hero-sub { color: var(--parchment-dim); margin: 0; max-width: 56ch; }
 
 /* ---------------------------------------------------------------
-   the shelf — signature element: genre picker as book spines
+   signature element: genre picker as book spines
 --------------------------------------------------------------- */
 .shelf {
     display: flex;
