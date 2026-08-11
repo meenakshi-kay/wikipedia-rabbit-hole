@@ -13,12 +13,18 @@
 <div class="page">
     <nav class="topnav">
         <a href="{{ url_for('index') }}" class="brand">
-            <span class="brand-mark">&#9776;</span> the wikipedia rabbit hole
+            <span class="brand-mark">&#9776;</span> the archive
         </a>
         <div class="topnav-links">
+            {% if current_user.is_authenticated %}
             <a href="{{ url_for('index') }}" class="{{ 'is-active' if request.path == '/' else '' }}">reading room</a>
             <a href="{{ url_for('read_later') }}" class="{{ 'is-active' if request.path == '/read-later' else '' }}">read later</a>
             <a href="{{ url_for('learned') }}" class="{{ 'is-active' if request.path == '/learned' else '' }}">my shelf</a>
+            <a href="{{ url_for('logout') }}">sign out ({{ current_user.username }})</a>
+            {% else %}
+            <a href="{{ url_for('login') }}">sign in</a>
+            <a href="{{ url_for('register') }}">register</a>
+            {% endif %}
         </div>
     </nav>
 

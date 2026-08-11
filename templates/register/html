@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}the archive — register{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <p class="eyebrow">new membership</p>
+    <h1>create an account</h1>
+</header>
+
+<div class="index-card" style="max-width: 420px;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p class="error-line" style="justify-content:flex-start;">{{ messages[0] }}</p>
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" class="learn-form" style="border-top:none; margin-top:0; padding-top:0;">
+        <div class="field-row">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" required autofocus>
+        </div>
+        <div class="field-row">
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="field-row">
+            <label for="confirm">confirm password</label>
+            <input type="password" id="confirm" name="confirm" required>
+        </div>
+        <div class="card-actions">
+            <button class="btn btn-gold" type="submit">create account</button>
+        </div>
+    </form>
+    <p class="empty-hint" style="margin-top:18px;">
+        already registered? <a href="{{ url_for('login') }}">sign in</a>
+    </p>
+</div>
+{% endblock %}

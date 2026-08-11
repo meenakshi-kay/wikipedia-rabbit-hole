@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}the archive — sign in{% endblock %}
+
+{% block content %}
+<header class="hero">
+    <p class="eyebrow">members' entrance</p>
+    <h1>sign in</h1>
+</header>
+
+<div class="index-card" style="max-width: 420px;">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p class="error-line" style="justify-content:flex-start;">{{ messages[0] }}</p>
+        {% endif %}
+    {% endwith %}
+
+    <form method="post" class="learn-form" style="border-top:none; margin-top:0; padding-top:0;">
+        <div class="field-row">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" required autofocus>
+        </div>
+        <div class="field-row">
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="card-actions">
+            <button class="btn btn-gold" type="submit">sign in</button>
+        </div>
+    </form>
+    <p class="empty-hint" style="margin-top:18px;">
+        no account? <a href="{{ url_for('register') }}">register here</a>
+    </p>
+</div>
+{% endblock %}
