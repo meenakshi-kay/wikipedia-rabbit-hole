@@ -21,11 +21,11 @@ first run — that's where seen titles and your "learned" entries live.
 
 ## How it's structured
 
-- `app.py` — Flask routes (`/`, `/api/find`, `/api/learn`, `/learned`, delete)
-- `models.py` — SQLAlchemy models: `SeenTitle`, `LearnedEntry`
-- `wiki_client.py` — talks to the Wikipedia API (this is where genres/search
+- `app.py` : Flask routes (`/`, `/api/find`, `/api/learn`, `/learned`, delete)
+- `models.py` : SQLAlchemy models: `SeenTitle`, `LearnedEntry`
+- `wiki_client.py` :talks to the Wikipedia API (this is where genres/search
   terms live, and the speed-critical fetching logic)
-- `templates/` — Jinja2 templates
+- `templates/` : Jinja2 templates
 - `static/css/style.css`, `static/js/app.js`
 
 ## Why it's fast now
